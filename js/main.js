@@ -180,8 +180,12 @@ function clearForm() {
  * Raderar hela historiken.
  */
 function deleteHistory() {
-  // Radera sparad historik
-  // Uppdatera history och visningen på sidan
+  // Radera sparad historik från localStorage
+  localStorage.removeItem("history");
+
+  // Töm arrayen och uppdatera visningen på sidan
+  history = [];
+  renderHistory();
 }
 
 // Eventlyssnare
@@ -199,6 +203,7 @@ form.addEventListener("submit", function (event) {
 // När användaren klickar på "Rensa"
 clearButton.addEventListener("click", clearForm);
 // När användaren klickar på "Radera historik"
+deleteHistoryButton.addEventListener("click", deleteHistory);
 
 // När sidan laddas:
 window.addEventListener("DOMContentLoaded", function () {
