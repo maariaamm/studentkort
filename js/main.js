@@ -116,8 +116,20 @@ function renderHistory() {
  * Rensar formulär, aktuellt studentkort och felmeddelanden.
  */
 function clearForm() {
-  // Återställ formulär och studentkort
+  // Återställ formulärets fält
+  form.reset();
+
+  // Återställ studentkortet till standardtexterna
+  previewFullname.textContent = "Namn";
+  previewEmail.textContent = "E-post";
+  previewPhone.textContent = "Telefon";
+  previewFullname.style.fontFamily = "";
+  previewEmail.style.fontFamily = "";
+  previewPhone.style.fontFamily = "";
+
   // Rensa eventuella felmeddelanden
+  errors = [];
+  displayErrors();
 }
 
 /**
@@ -141,7 +153,7 @@ form.addEventListener("submit", function (event) {
   }
 });
 // När användaren klickar på "Rensa"
-
+clearButton.addEventListener("click", clearForm);
 // När användaren klickar på "Radera historik"
 
 // När sidan laddas:
