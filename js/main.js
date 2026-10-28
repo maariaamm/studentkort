@@ -98,7 +98,8 @@ function createStudentCard() {
 
   // Lägg till kortet först i historiken så att det senaste visas överst
   history.unshift(student);
-
+  // Spara historiken i localStorage
+  saveHistory();
   // Uppdatera historiken på sidan direkt
   renderHistory();
 }
@@ -108,6 +109,8 @@ function createStudentCard() {
  */
 function saveHistory() {
   // Spara history i localStorage
+  // localStorage lagrar bara text, så arrayen görs om till JSON-text
+  localStorage.setItem("history", JSON.stringify(history));
 }
 
 /**
