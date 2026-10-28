@@ -187,6 +187,13 @@ function deleteHistory() {
   history = [];
   renderHistory();
 }
+/**
+ * Tar bort alla tecken som inte är siffror från telefonfältet.
+ */
+function filterPhoneInput() {
+  // \D matchar allt som inte är en siffra, och g tar med alla förekomster
+  phoneInput.value = phoneInput.value.replace(/\D/g, "");
+}
 
 // Eventlyssnare
 
@@ -210,4 +217,6 @@ window.addEventListener("DOMContentLoaded", function () {
   loadHistory();
   renderHistory();
 });
-// - läs in och visa eventuell tidigare historik
+// När användaren skriver i telefonfältet:
+// ta bort allt som inte är siffror
+phoneInput.addEventListener("input", filterPhoneInput);
