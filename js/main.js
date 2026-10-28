@@ -32,17 +32,38 @@ let history = [];
  * @returns {boolean}
  */
 function validateForm() {
-  // Kontrollera formulärets obligatoriska fält
-  // Visa eventuella felmeddelanden
-  // Returnera resultatet (true eller false) av valideringen
-}
+  // Töm gamla fel så att de inte ackumuleras mellan försök
+  errors = [];
 
-/**
- * Visar felmeddelanden på sidan.
- */
+  // Kontrollera att varje obligatoriskt fält innehåller ett värde
+  // trim() gör att fält med bara mellanslag också räknas som tomma
+  if (fullnameInput.value.trim() === "") {
+    errors.push("Du måste ange ett namn.");
+  }
+  if (emailInput.value.trim() === "") {
+    errors.push("Du måste ange en e-postadress.");
+  }
+  if (phoneInput.value.trim() === "") {
+    errors.push("Du måste ange ett telefonnummer.");
+  }
+
+  // Visa felmeddelanden
+  displayErrors();
+
+  // Returnera true om inga fel hittas, annars false
+  return errors.length === 0;
+}
 function displayErrors() {
   // Rensa tidigare felmeddelanden
-  // Skriv ut aktuella felmeddelanden till DOM
+  // Rensa tidigare felmeddelanden
+  errorList.innerHTML = "";
+
+  // Skapa ett listelement (li) för varje felmeddelande i arrayen
+  for (const message of errors) {
+    const listItem = document.createElement("li");
+    listItem.textContent = message;
+    errorList.appendChild(listItem);
+  }
 }
 
 /**
@@ -114,8 +135,10 @@ form.addEventListener("submit", function (event) {
   // Stoppa webbläsarens standardbeteende (omladdning av sidan)
   event.preventDefault();
 
-  // Validering läggs till i nästa steg
-  createStudentCard();
+  // Skapa bara ett studentkort om valideringen lyckades
+  if (validateForm()) {
+    createStudentCard();
+  }
 });
 // När användaren klickar på "Rensa"
 
