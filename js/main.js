@@ -117,8 +117,13 @@ function saveHistory() {
  * Läser in tidigare historik från localStorage.
  */
 function loadHistory() {
-  // Hämta eventuell sparad historik
-  // Uppdatera history
+  // Hämta eventuell sparad historik (null om inget finns sparat)
+  const savedHistory = localStorage.getItem("history");
+
+  // Gör om JSON-texten till en array igen och uppdatera history
+  if (savedHistory !== null) {
+    history = JSON.parse(savedHistory);
+  }
 }
 
 /**
@@ -196,4 +201,8 @@ clearButton.addEventListener("click", clearForm);
 // När användaren klickar på "Radera historik"
 
 // När sidan laddas:
+window.addEventListener("DOMContentLoaded", function () {
+  loadHistory();
+  renderHistory();
+});
 // - läs in och visa eventuell tidigare historik
