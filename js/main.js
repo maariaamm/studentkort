@@ -1,7 +1,7 @@
 "use strict";
 /*
  * Laboration 5 - Studentkortsgenerator
- * Namn: DITT NAMN
+ * Namn: Mariam Aljizawi
  */
 
 // Hämta element från DOM
@@ -50,9 +50,22 @@ function displayErrors() {
  */
 function createStudentCard() {
   // Hämta information från formuläret
-  // Uppdatera studentkortet
-  // Lägg till studentkortet i historiken
-  // Spara och uppdatera historiken
+  const fullname = fullnameInput.value.trim();
+  const email = emailInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const font = fontSelect.value;
+
+  // Uppdatera studentkortet med texten från formuläret
+  previewFullname.textContent = fullname;
+  previewEmail.textContent = email;
+  previewPhone.textContent = phone;
+
+  // Använd det valda typsnittet på informationen
+  previewFullname.style.fontFamily = font;
+  previewEmail.style.fontFamily = font;
+  previewPhone.style.fontFamily = font;
+
+  // Historik läggs till i ett senare steg
 }
 
 /**
@@ -97,9 +110,13 @@ function deleteHistory() {
 // Eventlyssnare
 
 // När formuläret skickas:
-// - validera inmatningen
-// - skapa studentkort om valideringen lyckas
+form.addEventListener("submit", function (event) {
+  // Stoppa webbläsarens standardbeteende (omladdning av sidan)
+  event.preventDefault();
 
+  // Validering läggs till i nästa steg
+  createStudentCard();
+});
 // När användaren klickar på "Rensa"
 
 // När användaren klickar på "Radera historik"
